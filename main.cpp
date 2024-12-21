@@ -10,10 +10,10 @@
 
 int main()
 {
-    std::string fileName;
+   /* std::string fileName;
     std::cout<< "Choose file"<<std::endl;
     std::cin>> fileName;
-    std::ifstream img(fileName, std::ios::binary);
+    /*std::ifstream img(fileName, std::ios::binary);
 
     if(!img)
     {
@@ -214,6 +214,18 @@ int main()
         result_b.write(reinterpret_cast<char*>(pad_b.data()), padding_b);
         }
     }
-    result_b.close();
+    result_b.close();*/
+    IMG pic1 ("BMP.bmp");
+    pic1.Rotate_right();
+    pic1.save_pic("RotatedClockwise.bmp");
+
+    IMG pic2 ("BMP.bmp");
+    pic2.Rotate_left();
+    pic2.save_pic("RotatedCounterClockwise.bmp");
+
+    IMG pic3 ("RotatedCounterClockwise.bmp");
+    pic3.Gaussian_filter();
+    pic3.save_pic("Blurred.bmp");
+
     return 0;
 }

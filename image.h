@@ -5,6 +5,7 @@
 
 #include <fstream>
 #include <iostream>
+#include <vector>
 
 #pragma pack(push, 1)
 
@@ -35,11 +36,26 @@ struct BMPIMAGEHEADER
 #pragma pack(pop)
 struct BMPRGB
 {
-    unsigned char RGB_red;
-    unsigned char RGB_green;
-    unsigned char RGB_blue;
-    unsigned char alfa;
-    unsigned char color_space_type;
+    int32_t RGB_red{0x00ff0000};
+    int32_t RGB_green{0x0000ff00};
+    int32_t RGB_blue{0x000000ff};
+};
+
+class IMG
+{
+public:
+    BMPFILEHEADER fileheader;
+    BMPIMAGEHEADER imageheader;
+    BMPRGB rgbheader;
+
+    std::vector<uint8_t> pixels;
+
+    IMG(const char* fileName);
+
+    void Rotate_right();
+    void Rotate_left();
+    void Gaussian_filter();
+    void save_pic(const char* fileName);
 };
 
 
