@@ -29,7 +29,7 @@ IMG::IMG(const char* fileName)
     pixels.resize(imageheader.ImageSize);
     img.read((char*)pixels.data(), pixels.size());
 }
-
+// Функции поворота очень похожи. Возможно, следовало объединить их, добавив аргумент направления вращения и условие внутрь
 void IMG::Rotate_right()
 {
     int row = (imageheader.height * 3 + 3) & (~3);
@@ -63,6 +63,7 @@ void IMG::Rotate_left()
         {
             int index1 = i * ((imageheader.width * 3 + 3) & (~3)) + j * 3;
             int index2 = j * row + (imageheader.height - i - 1) * 3;
+            // Можно было создать структуру для пикселя, которая хранилась бы в векторе, тогда можно было бы делать это одним присваиванием 
             for (int g = 0; g<3; ++g)
             {
                 rotatedpixels_l[index2 + g] = pixels[index1 + g];
@@ -76,6 +77,7 @@ void IMG::Rotate_left()
 
 void IMG::Gaussian_filter()
 {
+    // Хотелось бы иметь возможность задавать произвольный размер ядра
     double gausskernel [3][3] =
     {
         {0.0585, 0.0965, 0.0585},
@@ -92,6 +94,7 @@ void IMG::Gaussian_filter()
         for (int x=0; x < width; ++x)
         {
             double redsum = 0.0, greensum = 0.0, bluesum = 0.0;
+            // Функция получается слишком громоздкая. Хотелось бы вынести эти внутренние циклы в отдельную функцию
             for (int ky = -1; ky <= 1; ++ky)
             {
                 for (int kx = -1; kx <= 1; ++kx)
