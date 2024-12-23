@@ -44,6 +44,8 @@ struct BMPRGB
 class IMG
 {
 public:
+    // Поля следовало сделать приватными, чтобы не было возможности изменять их вне публичного интерфейса класса
+    // Это нарушение инкапсуляции
     BMPFILEHEADER fileheader;
     BMPIMAGEHEADER imageheader;
     BMPRGB rgbheader;
@@ -51,7 +53,7 @@ public:
     std::vector<uint8_t> pixels;
 
     IMG(const char* fileName);
-
+    // Именуешь в разных стилях, выбери какой-то один и придерживайся
     void Rotate_right();
     void Rotate_left();
     void Gaussian_filter();
