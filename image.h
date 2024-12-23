@@ -3,6 +3,7 @@
 #ifndef IMG_H
 #define IMG_H
 
+// Подключать только то, что используешь непосредственно в этом файле
 #include <fstream>
 #include <iostream>
 #include <vector>
